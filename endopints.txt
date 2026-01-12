@@ -1,0 +1,20 @@
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    
+    // Auth
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Products
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::post('/products', [ProductController::class, 'store']);
+    Route::get('/products/{product}', [ProductController::class, 'show']);
+    Route::put('/products/{product}', [ProductController::class, 'update']);
+    Route::post('/products/{product}/stock', [ProductController::class, 'addStock']);
+
+    // Sales
+    Route::post('/sales', [SaleController::class, 'store']);
+});
