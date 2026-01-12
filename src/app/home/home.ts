@@ -19,4 +19,8 @@ export class Home {
   ngOnInit() {
     this.menuItems = MenuItems;
   }
+
+  get isMobile(): boolean {
+    return window.innerWidth < 768;
+  }
 }
