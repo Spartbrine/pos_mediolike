@@ -21,6 +21,8 @@ export class AuthService extends ApiBaseService {
     return !!token;
   });
 
+  readonly currentUser = this.userSignal.asReadonly();
+
 
   constructor(
     protected override http: HttpClient,
@@ -59,9 +61,19 @@ export class AuthService extends ApiBaseService {
     this.userSignal.set(user);
 
     if (this.isBrowser) {
-      const storage = rememberMe ? localStorage : sessionStorage;
-      storage.setItem(this.tokenKey, token);
-      storage.setItem(this.userKey, JSON.stringify(user));
+      if (rememberMe) {
+        localStorage.setItem(this.tokenKey, token);
+        localStorage.setItem(this.userKey, JSON.stringify(user));
+        // Clean session storage to prevent conflicts
+        sessionStorage.removeItem(this.tokenKey);
+        sessionStorage.removeItem(this.userKey);
+      } else {
+        sessionStorage.setItem(this.tokenKey, token);
+        sessionStorage.setItem(this.userKey, JSON.stringify(user));
+        // Clean local storage to prevent conflicts
+        localStorage.removeItem(this.tokenKey);
+        localStorage.removeItem(this.userKey);
+      }
     }
   }
 

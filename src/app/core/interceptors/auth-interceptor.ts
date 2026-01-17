@@ -5,12 +5,13 @@ import { catchError, throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
-  let userKey = 'user_data';
-  let token = localStorage.getItem(userKey);
+  const tokenKey = 'token_sanctum';
+  const userKey = 'user_data';
+  let token = localStorage.getItem(tokenKey);
 
   let authRequest = req;
   if (!token)
-    token = sessionStorage.getItem(userKey);
+    token = sessionStorage.getItem(tokenKey);
 
   if (token) {
     authRequest = req.clone({
@@ -23,8 +24,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(authRequest).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
-        localStorage.removeItem('token');
-        router.navigate(['/login']);
+        localStorage.removeItem(tokenKey);
+        localStorage.removeItem(userKey);
+        sessionStorage.removeItem(tokenKey);
+        sessionStorage.removeItem(userKey);
+        router.navigate(['/']);
       }
       return throwError(() => error);
     })

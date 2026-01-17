@@ -1,0 +1,47 @@
+<div class="flex justify-content-center">
+    <p-toast></p-toast>
+    <p-card header="Register Employee" [style]="{ width: '100%', maxWidth: '600px' }">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-3">
+
+            <div class="flex flex-column gap-2">
+                <div class="flex flex-column gap-4 fadein animation-duration-500">
+                    <div class="flex align-items-center gap-2 mb-3">
+                        <p-button icon="pi pi-arrow-left" [routerLink]="['/users']"
+                            styleClass="p-button-text"></p-button>
+                        <h2 class="m-0 text-color">Registrar Empleado</h2>
+                    </div>
+
+                    <p-card styleClass="shadow-2">
+                        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-4">
+                            <div class="grid formgrid p-fluid">
+                                <div class="col-12 md:col-6 field">
+                                    <label for="name" class="font-medium text-color-secondary">Nombre</label>
+                                    <input pInputText id="name" formControlName="name" placeholder="Nombre completo" />
+                                </div>
+                                <div class="col-12 md:col-6 field">
+                                    <label for="email" class="font-medium text-color-secondary">Correo</label>
+                                    <input pInputText id="email" formControlName="email"
+                                        placeholder="correo@ejemplo.com" />
+                                </div>
+                                <div class="col-12 md:col-6 field">
+                                    <label for="password" class="font-medium text-color-secondary">Contraseña</label>
+                                    <p-password id="password" formControlName="password" [toggleMask]="true"
+                                        [feedback]="false"></p-password>
+                                </div>
+                                <div class="col-12 md:col-6 field">
+                                    <label for="password_confirmation"
+                                        class="font-medium text-color-secondary">Confirmar Contraseña</label>
+                                    <p-password id="password_confirmation" formControlName="password_confirmation"
+                                        [toggleMask]="true" [feedback]="false"></p-password>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-content-end gap-2">
+                                <p-button label="Cancelar" styleClass="p-button-outlined"
+                                    [routerLink]="['/users']"></p-button>
+                                <p-button label="Crear Empleado" type="submit" [loading]="isLoading()"></p-button>
+                            </div>
+                        </form>
+                    </p-card>
+                </div>
+            </div>

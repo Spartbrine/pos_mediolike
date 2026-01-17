@@ -1,0 +1,16 @@
+<div class="grid">
+    <div class="col-12 md:col-6 lg:col-3" *ngFor="let stat of stats">
+        <p-card styleClass="mb-2">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-color-secondary font-medium mb-3">{{ stat.title }}</span>
+                    <div class="text-color font-medium text-xl">{{ stat.value }}</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-{{stat.color}}-500 border-round"
+                    style="width: 2.5rem; height: 2.5rem">
+                    <i class="{{ stat.icon }} text-white text-xl"></i>
+                </div>
+            </div>
+        </p-card>
+    </div>
+</div>

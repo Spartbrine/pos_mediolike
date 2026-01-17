@@ -1,0 +1,12 @@
+:host {
+    display: block;
+    height: 100%;
+}
+
+::ng-deep .p-menu {
+    border: none !important;
+}
+
+::ng-deep .p-menu .p-menuitem-link {
+    padding: 1rem 1.5rem;
+}

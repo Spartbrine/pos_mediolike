@@ -1,0 +1,30 @@
+<div class="hidden md:flex flex-column h-full surface-card border-right-1 surface-border" style="width: 250px;">
+    <div class="flex align-items-center justify-content-center p-4 border-bottom-1 surface-border">
+        <span class="text-xl font-bold text-primary">Punto de Venta</span>
+    </div>
+
+    <div class="flex-1 overflow-y-auto">
+        <p-menu [model]="items" styleClass="w-full border-none"></p-menu>
+    </div>
+
+    <div class="p-3 border-top-1 surface-border">
+        <div class="flex align-items-center gap-2">
+            <i class="pi pi-user p-2 surface-ground border-circle text-color-secondary"></i>
+            <div class="flex flex-column">
+                <span class="font-bold text-sm text-color">{{ user()?.name }}</span>
+                <span class="text-xs text-color-secondary">{{ user()?.email }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="md:hidden">
+    <p-dock [model]="dockItems" position="bottom">
+        <ng-template pTemplate="item" let-item>
+            <a [pTooltip]="item.label" tooltipPosition="top" (click)="item.command()"
+                class="p-dock-action cursor-pointer">
+                <i [class]="item.icon" style="font-size: 1.5rem"></i>
+            </a>
+        </ng-template>
+    </p-dock>
+</div>
