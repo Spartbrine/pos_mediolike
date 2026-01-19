@@ -30,13 +30,7 @@ export class UserListContainerComponent {
         this.isLoading.set(true);
         this.userService.getUsers().subscribe({
             next: (data) => {
-                if (Array.isArray(data)) {
-                    this.users.set(data);
-                } else {
-                    if ((data as any).data && Array.isArray((data as any).data)) {
-                        this.users.set((data as any).data);
-                    }
-                }
+                this.users.set(data);
                 this.isLoading.set(false);
             },
             error: (err) => {
