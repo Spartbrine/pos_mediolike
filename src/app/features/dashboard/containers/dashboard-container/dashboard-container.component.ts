@@ -6,7 +6,10 @@ import { CardModule } from 'primeng/card';
 @Component({
     selector: 'app-dashboard-container',
     standalone: true,
-    imports: [CommonModule, CardModule],
+    imports: [
+        CommonModule,
+        CardModule
+    ],
     templateUrl: './dashboard-container.component.html',
     styleUrl: './dashboard-container.component.css'
 })
