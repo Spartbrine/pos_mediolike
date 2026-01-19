@@ -12,7 +12,6 @@ export class UserService extends ApiBaseService {
     getUsers(): Observable<User[]> {
         return this.get<PaginatedResponse<User>>('users').pipe(
             map(response => {
-                console.log('API Response:', response);
                 return response.data.data;
             })
         );

@@ -10,6 +10,9 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { BranchService } from '../../services/branch-service';
+import { Branch } from '../../branch.interface';
+import { Select } from 'primeng/select';
 
 @Component({
     selector: 'app-user-create-container',
@@ -22,7 +25,8 @@ import { ToastModule } from 'primeng/toast';
         PasswordModule,
         ButtonModule,
         ToastModule,
-        RouterLink
+        RouterLink,
+        Select
     ],
     providers: [MessageService],
     templateUrl: './user-create-container.component.html',
@@ -33,15 +37,31 @@ export class UserCreateContainerComponent {
     private userService = inject(UserService);
     private router = inject(Router);
     private messageService = inject(MessageService);
+    private branchService = inject(BranchService);
 
     userForm: FormGroup = this.fb.group({
         name: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
+        branch_id: ['', [Validators.required]],
         password: ['', [Validators.required, Validators.minLength(8)]],
-        password_confirmation: ['', [Validators.required]]
+        password_confirmation: ['', [Validators.required]],
+        role: ['cajero']
     });
 
+    branches: Branch[] = [];
+
     isLoading = signal(false);
+
+    ngOnInit() {
+        this.branchService.getBranches().subscribe({
+            next: (branches) => {
+                this.branches = branches;
+            },
+            error: (err) => {
+                console.error('Error al cargar las sucursales.', err);
+            }
+        });
+    }
 
     onSubmit() {
         if (this.userForm.invalid) {

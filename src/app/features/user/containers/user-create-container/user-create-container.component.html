@@ -1,8 +1,7 @@
 <div class="flex justify-content-center">
     <p-toast></p-toast>
-    <p-card header="Register Employee" [style]="{ width: '100%', maxWidth: '600px' }">
+    <p-card [style]="{ width: '100%', maxWidth: '600px' }">
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-3">
-
             <div class="flex flex-column gap-2">
                 <div class="flex flex-column gap-4 fadein animation-duration-500">
                     <div class="flex align-items-center gap-2 mb-3">
@@ -11,7 +10,7 @@
                         <h2 class="m-0 text-color">Registrar Empleado</h2>
                     </div>
 
-                    <p-card styleClass="shadow-2">
+                    <p-card class="shadow-2">
                         <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-4">
                             <div class="grid formgrid p-fluid">
                                 <div class="col-12 md:col-6 field">
@@ -22,6 +21,11 @@
                                     <label for="email" class="font-medium text-color-secondary">Correo</label>
                                     <input pInputText id="email" formControlName="email"
                                         placeholder="correo@ejemplo.com" />
+                                </div>
+                                <div class="col-12 md:col-6 field">
+                                    <p-select [options]="branches" optionValue="id" optionLabel="name"
+                                        formControlName="branch_id" placeholder="Seleccione una sucursal"
+                                        class="w-full md:w-56" />
                                 </div>
                                 <div class="col-12 md:col-6 field">
                                     <label for="password" class="font-medium text-color-secondary">Contraseña</label>
@@ -45,3 +49,6 @@
                     </p-card>
                 </div>
             </div>
+        </form>
+    </p-card>
+</div>
