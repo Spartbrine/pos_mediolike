@@ -11,32 +11,36 @@
                 <input pInputText id="email" formControlName="email" placeholder="Ingresa tu correo"
                     [class.ng-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
                     [class.ng-dirty]="loginForm.get('email')?.touched" />
-                <small *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-red-500">
+                @if(loginForm.get('email')?.invalid && loginForm.get('email')?.touched){
+                <small class="text-red-500">
                     Se requiere un correo electrónico válido
                 </small>
+                }
             </div>
 
             <div class="flex flex-column gap-2">
                 <label for="password" class="font-semibold">Contraseña</label>
                 <p-password id="password" formControlName="password" [feedback]="false" [toggleMask]="true"
-                    placeholder="Ingresa tu contraseña" styleClass="w-full" [inputStyle]="{'width': '100%'}"
+                    placeholder="Ingresa tu contraseña" class="w-full" [inputStyle]="{'width': '100%'}"
                     [class.ng-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
                     [class.ng-dirty]="loginForm.get('password')?.touched"></p-password>
-                <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
-                    class="text-red-500">
+                @if(loginForm.get('password')?.invalid && loginForm.get('password')?.touched){
+                <small class="text-red-500">
                     Se requiere una contraseña
                 </small>
+                }
             </div>
 
             <div class="flex align-items-center justify-content-between mb-2">
                 <div class="flex align-items-center gap-2">
                     <p-checkbox formControlName="rememberMe" [binary]="true" inputId="rememberMe"></p-checkbox>
-                    <label for="rememberMe">Remember me</label>
+                    <label for="rememberMe">Recordarme</label>
                 </div>
-                <a class="text-primary no-underline hover:underline cursor-pointer text-sm">Forgot Password?</a>
+                <a class="text-primary no-underline hover:underline cursor-pointer text-sm">¿Olvidaste tu
+                    contraseña?</a>
             </div>
 
-            <p-button label="Sign In" type="submit" [loading]="isLoading()" styleClass="w-full"></p-button>
+            <p-button label="Iniciar Sesión" type="submit" [loading]="isLoading()" styleClass="w-full"></p-button>
         </form>
     </p-card>
 </div>
