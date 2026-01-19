@@ -23,12 +23,8 @@ export const routes: Routes = [
             },
             {
                 path: 'users',
-                loadComponent: () => import('./features/user/containers/user-list-container/user-list-container.component').then(m => m.UserListContainerComponent)
+                loadChildren: () => import('./features/user/users.routes').then(m => m.USERS_ROUTES)
             },
-            {
-                path: 'users/create',
-                loadComponent: () => import('./features/user/containers/user-create-container/user-create-container.component').then(m => m.UserCreateContainerComponent)
-            }
         ]
     }
 ];
