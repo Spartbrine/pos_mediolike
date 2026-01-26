@@ -1,0 +1,24 @@
+<p-card [header]="header">
+    <div class="grid">
+        <div class="col-12 md:col-3">
+            <p-floatlabel variant="in">
+                <input [disabled]="!isEditing" pInputText id="name" [(ngModel)]="product.name"
+                    [invalid]="product.name == ''" autocomplete="off" />
+                <label for="name">Nombre del producto</label>
+            </p-floatlabel>
+        </div>
+        <div class="col-12 md:col-3">
+            <p-floatlabel variant="in">
+                <input type="number" [disabled]="!isEditing" pInputText id="price" [(ngModel)]="product.price"
+                    [invalid]="product.price < 0" autocomplete="off" />
+                <label for="price">Precio del producto</label>
+            </p-floatlabel>
+        </div>
+        <div class="col-12">
+            <div class="flex justify-content-end">
+                <p-button label="Guardar" icon="pi pi-check" (click)="saveProduct()"
+                    [disabled]="!isEditing || product.name == '' || product.price < 0"></p-button>
+            </div>
+        </div>
+    </div>
+</p-card>

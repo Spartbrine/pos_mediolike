@@ -3,12 +3,13 @@
         <h2 class="m-0 text-color">Productos</h2>
     </div>
     <div class="grid">
+        @if(products.length > 0){
         @for (product of products; track product.id) {
-        <div class="col-12 md:col-4 lg:col-3 p-2">
+        <div class="col-12 md:col-6 lg:col-4 xl:col-3 p-2">
             <product-card [product]="product">
             </product-card>
         </div>
         }
+        }
     </div>
-
 </div>

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Product } from '../../product.interface';
 import { ProductCard } from '../../components/product-card/product-card';
-import { ProductFacadeService } from '../../services/product-facade-service';
+import { ProductApiService } from '../../services/product-api-service';
 
 @Component({
   selector: 'app-product-list-container',
@@ -12,12 +12,18 @@ import { ProductFacadeService } from '../../services/product-facade-service';
   styleUrl: './product-list-container.css',
 })
 export class ProductListContainer {
-  private productFacadeService = inject(ProductFacadeService);
+  private productApiService = inject(ProductApiService);
   products: Product[] = [];
 
   ngOnInit() {
-    this.products = this.productFacadeService.getProductPaginated();
+    this.productApiService.getProducts().subscribe({
+      next: (response) => {
+        this.products = response.data.data;
+      },
+      error: (error) => {
+        console.error('Error fetching products:', error);
+      }
+    });
   }
-
 
 }

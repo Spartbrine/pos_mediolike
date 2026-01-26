@@ -1,3 +1,6 @@
-<p-card [header]="product.name" [subheader]="'$' + product.price">
-    <ng-content></ng-content>
+<p-card (dblclick)="viewProduct()" [header]="product.name" [subheader]="'$' + product.price">
+    <div class="my-2 flex justify-content-between">
+        <p-button (click)="editProduct()" label="Editar" variant="outlined" />
+        <p-button (click)="deleteProduct()" label="Eliminar" variant="outlined" severity="secondary" />
+    </div>
 </p-card>

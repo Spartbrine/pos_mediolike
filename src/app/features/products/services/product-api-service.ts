@@ -16,4 +16,12 @@ export class ProductApiService extends ApiBaseService {
   getProducts(): Observable<PaginatedResponse<Product>> {
     return this.get<PaginatedResponse<Product>>('products');
   }
+
+  postProduct(product: Product): Observable<Product> {
+    return this.post<Product>('products', product);
+  }
+
+  putProduct(productId: number, product: Product): Observable<Product> {
+    return this.put<Product>(`products/${productId}`, product);
+  }
 }

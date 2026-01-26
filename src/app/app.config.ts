@@ -7,6 +7,7 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { providePrimeNG } from 'primeng/config';
 import Lara from '@primeuix/themes/lara';
 import { authInterceptor } from './core/interceptors/auth-interceptor';
+import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,6 +24,7 @@ export const appConfig: ApplicationConfig = {
           darkModeSelector: 'system',
         }
       }
-    })
+    }),
+    MessageService
   ]
 };
