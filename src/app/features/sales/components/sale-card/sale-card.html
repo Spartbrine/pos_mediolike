@@ -1,0 +1,13 @@
+<p-card>
+    <ng-template pTemplate="header">
+        Venta #{{ sale.id }} - {{ sale.date | date:'short' }}
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="mb-3">
+            <strong>Cliente:</strong> {{ sale.customer?.name }}
+        </div>
+        <div class="mb-3">
+            <strong>Total:</strong> {{ sale.total | currency }}
+        </div>
+    </ng-template>
+</p-card>

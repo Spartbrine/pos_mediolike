@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="flex justify-content-between align-items-center mb-4">
+        <h2 class="m-0 text-color">{{ title }}</h2>
+        @if(tabValue == 0){
+        <button pButton type="button" label="Nueva Venta" (click)="changeTab(1)" icon="pi pi-plus"
+            class="p-button-success"></button>
+        }
+    </div>
+    <p-tabs [(value)]="tabValue">
+        <p-tabpanels>
+            <p-tabpanel [value]="0">
+                <div class="grid">
+                    @if(sales.length > 0){
+                    @for (sale of sales; track sale.id) {
+                    <div class="col-12 md:col-6 lg:col-4 xl:col-3 p-2">
+                        <sale-card [sale]="sale"></sale-card>
+                    </div>
+                    }
+                    }
+                </div>
+            </p-tabpanel>
+            <p-tabpanel [value]="1" [lazy]="true">
+                <sale-create (onChangeTab)="changeTab($event)"></sale-create>
+            </p-tabpanel>
+            <p-tabpanel [value]="2" [lazy]="true">
+
+            </p-tabpanel>
+        </p-tabpanels>
+    </p-tabs>
+
+</div>

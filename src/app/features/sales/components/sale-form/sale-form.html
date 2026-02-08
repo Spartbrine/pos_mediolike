@@ -1,0 +1,73 @@
+<div class="grid">
+    <div class="col-12 md:col-8">
+        @if(products.length === 0){
+        <p>No hay productos disponibles para añadir a la venta.</p>
+        } @else {
+
+        <div class="grid p-2">
+            @for(product of products; track product.id) {
+            <p-card class="col-12 md:col-6 lg:col-4 border-1 border-gray-300 m-3 p-2 max-w-sm">
+                <ng-template pTemplate="header">
+                    {{ product.name }}
+                </ng-template>
+                <div class="p-card-content">
+                    <p>Precio: {{ product.price | currency }}</p>
+                    <p-button type="button" label="Añadir a la venta" (click)="addSaleDetail(product)"
+                        class="mt-2"></p-button>
+                </div>
+            </p-card>
+            }
+        </div>
+        }
+    </div>
+    <div class="col-12 md:col-4">
+        <div>
+            <h5>Resumen de la venta</h5>
+            <p>Detalles de la venta, como productos añadidos, cantidades, precios y total.</p>
+        </div>
+        @if(details.length === 0){
+        <p>No se han añadido productos a la venta.</p>
+        } @else {
+        <div class="grid p-2">
+            @for(detail of details; track detail.product_id) {
+            <div class="col-12 border-1 border-gray-300 m-2 p-2">
+                <div class="grid">
+                    <div class="col-12">
+                        <p>{{ detail.product?.name }}</p>
+                    </div>
+                    <div class="col-12">
+                        <p>Cantidad: {{ detail.quantity }} - Precio: {{ detail.price | currency }}</p>
+                    </div>
+                    <div class="col-6">
+                        <div class="flex justify-content-between mt-2">
+                            <p-button icon="pi pi-trash" (click)="removeSaleDetail(detail)"></p-button>
+                            <p-button icon="pi pi-minus" (click)="removeOneFromDetail(detail)"></p-button>
+                            <p-button icon="pi pi-plus" (click)="addOneToDetail(detail)"></p-button>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="flex justify-content-end">
+                            <p class="mr-4">Total: {{ detail.quantity * detail.price | currency }}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            }
+            <p-floatlabel variant="in">
+                <input pInputText id="paidAmount" [(ngModel)]="paidAmount" autocomplete="off" />
+                <label for="paidAmount">Cantidad pagada</label>
+            </p-floatlabel>
+            <div class="col-12 border-1 border-gray-300 m-2 p-2">
+                <div class="flex justify-content-around">
+                    <p-button [disabled]="paidAmount < getTotalBySale()" label="Cobrar" icon="pi pi-shopping-cart"
+                        (click)="checkout()"></p-button>
+                    <p class="mr-4 font-bold">Total de la venta: {{ getTotalBySale() | currency }}</p>
+                </div>
+            </div>
+        </div>
+        }
+
+    </div>
+</div>

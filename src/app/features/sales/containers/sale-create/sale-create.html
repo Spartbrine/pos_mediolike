@@ -1,0 +1,11 @@
+<div class="grid p-2">
+    <div class="col-12">
+        <p-button type="button" label="Volver a la lista de ventas" (click)="changeTab(0)" icon="pi pi-arrow-left"
+            class="mt-1 p-button-secondary mb-4"></p-button>
+    </div>
+    <div class="col-12">
+        <sale-form [customers]="customers" [branches]="branches"></sale-form>
+    </div>
+
+
+</div>
